@@ -1,0 +1,26 @@
+version: '3.8'
+name: journal-system
+services:
+  backend:
+    volumes:
+        - ./uploads:/app/uploads
+    image: kapraomookrop/journal-server:v1
+    restart: always
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - JWT_SECRET=${JWT_SECRET}
+      - CLIENT_URL=${CLIENT_URL}
+    expose:
+      - "3000"
+
+  frontend:
+    image: kapraomookrop/journal-client:v1
+    ports:
+      - "4200:80"
+    restart: always
+    depends_on:
+      - backend

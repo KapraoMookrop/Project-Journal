@@ -1,0 +1,11 @@
+@if(stateService.isLoading()) {
+<div class="modal-loading">
+  <div class="loader"></div>
+</div>
+}
+@if(shouldShowNavbar()) {
+<app-navbar></app-navbar>
+}
+<div class="container-fluid main-content">
+    <router-outlet></router-outlet>
+</div>
