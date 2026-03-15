@@ -1,26 +1,58 @@
-version: '3.8'
+# 1. เอาบรรทัด version ออกตามคำแนะนำของ Docker (มันเก่าแล้ว)
 name: journal-system
+
 services:
-  backend:
-    volumes:
-        - ./uploads:/app/uploads
-    image: kapraomookrop/journal-server:v1
+  db:
+    image: postgres:15-alpine
+    container_name: journal-db
     restart: always
     environment:
-      - DB_HOST=${DB_HOST}
-      - DB_PORT=${DB_PORT}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+
+  backend:
+    image: kapraomookrop/journal-server:v1
+    container_name: journal-api
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db 
+      - DB_PORT=5432
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
       - JWT_SECRET=${JWT_SECRET}
       - CLIENT_URL=${CLIENT_URL}
+      - DB_SSL=${DB_SSL}
+    volumes:
+      - ./uploads:/app/uploads
     expose:
       - "3000"
 
   frontend:
     image: kapraomookrop/journal-client:v1
+    container_name: journal-web
     ports:
       - "4200:80"
     restart: always
     depends_on:
       - backend
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: journal-pgadmin
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=chatchawant03@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=Tigerza8539
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
