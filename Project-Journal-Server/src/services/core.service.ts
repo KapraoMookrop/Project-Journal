@@ -92,7 +92,6 @@ export async function SignJWT(user: any) {
             email: user.email,
             role: user.role,
             userStatus: user.status,
-            isEnabled2FA: user.twofa_enabled,
             name: user.name,
             surname: user.surname,
             phone: user.phone,

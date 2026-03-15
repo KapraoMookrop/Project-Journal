@@ -12,7 +12,7 @@ export async function SignUp(req: Request, res: Response, next: NextFunction) {
 
 export async function Login(req: Request, res: Response, next: NextFunction) {
   try {
-    const response = await userService.Login(req.body.Email, req.body.Password);
+    const response = await userService.Login(req.body);
 
     res.status(200).json(response);
   } catch (error) {

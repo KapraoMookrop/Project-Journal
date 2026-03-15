@@ -1,10 +1,8 @@
 import { UserRole, UserStatus } from "./Enum.js";
+import type { UserInfoData } from "./UserInfoData.js";
 
 export interface SignUpDataRequest {
-    FullName: string;
     Email: string;
     Password: string;
-    Phone: string;
-    Role: UserRole;
-    UserStatus: UserStatus;
+    UserInfo: UserInfoData;
 }

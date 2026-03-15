@@ -23,6 +23,6 @@ export class Navbar implements OnInit {
   }
 
   getLogoUser() {
-    return this.stateService.user()?.FullName.replaceAll("นาย", "").replaceAll("นางสาว", "").replaceAll("นาง", "").charAt(0) || "";
+    return this.stateService.user()?.Name.charAt(0) || "";
   }
 }

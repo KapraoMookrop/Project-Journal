@@ -1,15 +1,23 @@
 //  Role ของผู้ใช้ในระบบ
 export enum UserRole {
-  BUYER = "BUYER",
-  SELLER = "SELLER",
-  ADMIN = "ADMIN",
+  ADMIN = "Admin",
+  AUTHOR = "Author",
+  REVIEWER = "Reviewer",
 }
 
 // สถานะบัญชีผู้ใช้
 export enum UserStatus {
-  ACTIVE = "ACTIVE",
-  PENDING_VERIFICATION = "PENDING_VERIFICATION",
-  SUSPENDED = "SUSPENDED",
+  ACTIVE = "Active",
+  PENDING = "Pending",
+  INACTIVE = "InActive",
+}
+
+export enum JournalStatus {
+  PENDING = "Pending",
+  REVIEWING = "Reviewing",
+  NEEDREVISION = "Needs Revision",
+  APPROVED = "Approved",
+  REJECTED = "Rejected",
 }
 
 // ประเภทของการยืนยัน 2FA

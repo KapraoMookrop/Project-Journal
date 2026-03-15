@@ -35,6 +35,10 @@
                     </div>
                     <div class="step" [class.active]="step >= 2">
                         <div class="step-icon">2</div>
+                        <div class="text-sm">ข้อมูลส่วนตัว</div>
+                    </div>
+                    <div class="step" [class.active]="step >= 3">
+                        <div class="step-icon">3</div>
                         <div class="text-sm">ยืนยันการสมัคร</div>
                     </div>
                 </div>
@@ -121,8 +125,43 @@
                 </div>
                 }
 
-                <!-- STEP 2 -->
-                @if(step === 2){
+                 @if(step === 2){
+                <div class="fade-slide">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">
+                            <i class="fa-regular fa-user"></i>
+                        </span>
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control" placeholder="ชื่อ"
+                                [(ngModel)]="UserSignUpRequest.UserInfo.Name" name="fullName">
+                            <label for="fullName">ชื่อ</label>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" placeholder="นามสกุล"
+                                [(ngModel)]="UserSignUpRequest.UserInfo.SurName" name="lastName">
+                            <label for="lastName">นามสกุล</label>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-phone"></i>
+                        </span>
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control" placeholder="เบอร์โทรศัพท์"
+                                [(ngModel)]="UserSignUpRequest.UserInfo.Phone" name="phone">
+                            <label for="phone">เบอร์โทรศัพท์</label>
+                        </div>
+                    </div>
+                </div>
+                }
+
+                <!-- STEP 3 -->
+                @if(step === 3){
 
                 <div class="fade-slide">
                     <div class="sub-card">
@@ -144,11 +183,11 @@
                         <div class="sub-card-body mt-3">
                             <div class="d-flex gap-2 my-2">
                                 <span class="text-sm text-muted col-3">ชื่อ - นามสกุล : </span>
-                                <span class="text-sm text-bold col-9">{{ UserSignUpRequest.FullName }}</span>
+                                <span class="text-sm text-bold col-9">{{ UserSignUpRequest.UserInfo.Name }} {{ UserSignUpRequest.UserInfo.SurName }}</span>
                             </div>
                             <div class="d-flex gap-2 my-2">
                                 <span class="text-sm text-muted col-3">เบอร์โทร : </span>
-                                <span class="text-sm text-bold col-9">{{ UserSignUpRequest.Phone }}</span>
+                                <span class="text-sm text-bold col-9">{{ UserSignUpRequest.UserInfo.Phone }}</span>
                             </div>
                         </div>
                     </div>
