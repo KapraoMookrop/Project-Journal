@@ -24,28 +24,17 @@ export class CoreAppService {
         return response;
     }
 
-    async Verify2FA(email: string, token: string, type: Verify2FAType): Promise<LoginResponseData> {
-        const observable = this.http.post<LoginResponseData>(
-            `${this.baseUrl}/core/Verify2FA`,
-            { email, token, type }
-        );
-        const response = await lastValueFrom(observable);
-        return response;
-    }
-
-    async Enable2FA(): Promise<{ qr: string; secret: string; }> {
-        const observable = this.http.post<{ qr: string; secret: string; }>(
-            `${this.baseUrl}/core/Enable2FA`,
-            {}
-        );
-        const response = await lastValueFrom(observable);
-        return response;
-    }
-
-    async Disable2FA(): Promise<void> {
+    async SendForgotPasswordEmail(email: string): Promise<void> {
         const observable = this.http.post<void>(
-            `${this.baseUrl}/core/Disable2FA`,
-            {}
+            `${this.baseUrl}/core/SendForgotPasswordEmail`, { email }
+        );
+        const response = await lastValueFrom(observable);
+        return response;
+    }
+
+    async ChangePassword(token: string, newPassword: string): Promise<void> {
+        const observable = this.http.post<void>(
+            `${this.baseUrl}/core/ChangePassword`, { token, newPassword }
         );
         const response = await lastValueFrom(observable);
         return response;

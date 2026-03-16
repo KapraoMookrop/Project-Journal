@@ -4,6 +4,8 @@ import { authenticateToken } from "../middleware/auth.middleware.js";
 
 const router = Router();
 
-router.get("/verifyEmail", coreController.VerifyEmail);
+router.get("/VerifyEmail", coreController.VerifyEmail);
+router.post("/SendForgotPasswordEmail", coreController.SendForgotPasswordEmail);
+router.post("/ChangePassword", coreController.ChangePassword);
 
 export default router;

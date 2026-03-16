@@ -1,6 +1,5 @@
 import pool from "../config/database.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import { type SignUpDataRequest } from "../module/SignUpDataRequest.js";
 import { UserStatus, UserRole } from "../module/Enum.js";
 import type { UUID } from "node:crypto";
@@ -10,7 +9,7 @@ import * as Core from "./core.service.js";
 import type { LoginDataRequest } from "../module/LoginDataRequest.js";
 
 export async function SignUp(request: SignUpDataRequest): Promise<UUID> {
-  const {Email, Password, UserInfo } = request;
+  const { Email, Password, UserInfo } = request;
   const client = await pool.connect();
 
   try {
@@ -99,4 +98,17 @@ export async function Login(request: LoginDataRequest): Promise<LoginResponseDat
   const loginResponseData = await Core.SignJWT(user);
 
   return loginResponseData;
+}
+
+export async function CheckAlreadyExistsEmail(email: string): Promise<boolean> {
+  const result = await pool.query(
+    "SELECT id FROM jn.users WHERE email = $1",
+    [email]
+  );
+
+  if (result.rows.length > 0) {
+    throw new AppError("อีเมลนี้ถูกลงทะเบียนกับระบบแล้ว", 409);
+  }
+
+  return false;
 }

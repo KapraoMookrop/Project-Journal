@@ -4,8 +4,9 @@ import { authenticateToken } from "../middleware/auth.middleware.js";
 
 const router = Router();
 
-router.post("/signup", userController.SignUp);
-router.post("/login", userController.Login);
+router.post("/SignUp", userController.SignUp);
+router.post("/Login", userController.Login);
+router.get("/CheckAlreadyExistsEmail", userController.CheckAlreadyExistsEmail);
 router.post("/getJwt", authenticateToken, (req, res) => {
   res.json({ message: "This is a protected route", user: (req as any).user });
 });

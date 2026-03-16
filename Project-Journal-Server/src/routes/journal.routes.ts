@@ -5,9 +5,9 @@ import * as JournalController from "../controllers/journal.controller.js";
 
 const router = Router();
 
-router.post("/createJournal", authenticateToken, uploadJournal.single("file"), JournalController.CreateJournal);
-router.get("/getMyJournals", authenticateToken, JournalController.GetMyJournals);
-router.get("/getJournalForReviewer", authenticateToken, JournalController.GetJournalForReviewer);
-router.get("/getJournalVersions", authenticateToken, JournalController.GetJournalVersions);
+router.post("/CreateJournal", authenticateToken, uploadJournal.single("file"), JournalController.CreateJournal);
+router.get("/GetMyJournals", authenticateToken, JournalController.GetMyJournals);
+router.get("/GetJournalForReviewer", authenticateToken, JournalController.GetJournalForReviewer);
+router.get("/GetJournalVersions", authenticateToken, JournalController.GetJournalVersions);
 
 export default router;

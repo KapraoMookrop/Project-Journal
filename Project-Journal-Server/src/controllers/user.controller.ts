@@ -6,6 +6,7 @@ export async function SignUp(req: Request, res: Response, next: NextFunction) {
     const users = await userService.SignUp(req.body);
     res.json(users);
   } catch (error) {
+    console.error("Error in SignUp controller:", error);
     next(error);
   }
 }
@@ -16,6 +17,18 @@ export async function Login(req: Request, res: Response, next: NextFunction) {
 
     res.status(200).json(response);
   } catch (error) {
+    console.error("Error in Login controller:", error);
+    next(error);
+  }
+}
+
+export async function CheckAlreadyExistsEmail(req: Request, res: Response, next: NextFunction) {
+  try {
+    const email = req.query.email as string;
+    const exists = await userService.CheckAlreadyExistsEmail(email);
+    res.json({ exists });
+  } catch (error) {
+    console.error("Error in CheckAlreadyExistsEmail controller:", error);
     next(error);
   }
 }

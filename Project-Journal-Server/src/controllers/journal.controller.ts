@@ -13,6 +13,7 @@ export async function CreateJournal(req: Request, res: Response, next: NextFunct
         await JournalService.CreateJournal(request);
         res.json({ message: "สร้างวารสารสำเร็จ" });
     } catch (error) {
+        console.error("Error in CreateJournal controller:", error);
         next(error);
     }
 }
@@ -22,6 +23,7 @@ export async function GetMyJournals(req: Request, res: Response, next: NextFunct
         const journals = await JournalService.GetMyJournals((req as any).user?.userId);
         res.json(journals);
     } catch (error) {
+        console.error("Error in GetMyJournals controller:", error);
         next(error);
     }
 }
@@ -35,6 +37,7 @@ export async function GetJournalForReviewer(req: Request, res: Response, next: N
         const journals = await JournalService.GetJournalForReviewer();
         res.json(journals);
     } catch (error) {
+        console.error("Error in GetJournalForReviewer controller:", error);
         next(error);
     }
 }
@@ -48,6 +51,7 @@ export async function GetJournalVersions(req: Request, res: Response, next: Next
         const versions = await JournalService.GetJournalVersions(journalId, (req as any).user?.userId, (req as any).user?.role);
         res.json(versions);
     } catch (error) {
+        console.error("Error in GetJournalVersions controller:", error);
         next(error);
     }
 }
